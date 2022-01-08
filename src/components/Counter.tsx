@@ -4,13 +4,14 @@ import {Action} from "redux";
 
 interface CounterProps {
     count: number;
-    onClick: () => void;
+    onClick: (actionType: string) => void;
 }
 
 const Counter = (props: CounterProps) => (
   <div>
     <div>Current count: {props.count}</div>
-    <button onClick={props.onClick}>Increment</button>
+    <button onClick={() => props.onClick('INCREMENT')}>Increment</button>
+    <button onClick={() => props.onClick('DECREASE')}>Decrease</button>
   </div>
 );
 
@@ -18,17 +19,31 @@ interface StoreState {
     count: number
 }
 
-const mapStateToProps = (state: StoreState) => ({
+/*
+const mapStateToProps = (state: StoreState) ={
     count: state.count
 });
+*/
 
-const mapDispatchToProps = (dispatch: Dispatch<Action<string>>) => ({
-    onClick: () => dispatch({
-        type: 'INCREMENT'
+/*const mapDispatchToProps = (dispatch: Dispatch<Action<string>>) => ({
+    onClick: (actionType: string) => dispatch({
+        type: actionType
     })
-});
+});*/
 
-export const CounterContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Counter);
+function mapStateToProps(state: StoreState) {
+    return {
+        count: state.count
+    };
+}
+
+function mapDispatchToProps(dispatch: Dispatch<Action<string>>) {
+    return {
+        onClick: (actionType: string) => dispatch({
+            type: actionType
+        })
+    };
+}
+
+export const CounterContainer = connect(mapStateToProps, mapDispatchToProps)(Counter);
+// function currying
