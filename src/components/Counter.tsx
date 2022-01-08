@@ -20,8 +20,12 @@ const Counter = (props: CounterProps) => (
 );
 
 interface StoreState {
-    count: number,
-    active: boolean
+    counter: {
+        count: number,
+    }
+    active: {
+        active: boolean
+    }
 }
 
 /*
@@ -38,8 +42,8 @@ const mapStateToProps = (state: StoreState) ={
 
 function mapStateToProps(state: StoreState) {
     return {
-        count: state.count,
-        active: state.active
+        count: state.counter.count,
+        active: state.active.active
     };
 }
 
