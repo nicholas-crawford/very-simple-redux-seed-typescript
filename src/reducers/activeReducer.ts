@@ -1,12 +1,13 @@
 import {Action} from 'redux';
+import {activate, deactivate} from "../actionCreators/actionCreators";
 
 const initialState = { active: false };
 
 export const activeReducer = (state = initialState, action: Action<string>) => {
     switch (action.type) {
-        case 'ACTIVATE':
+        case activate:
             return { ...state, active: true}
-        case 'DEACTIVATE':
+        case deactivate:
             return { ...state, active: false}
         default:
             return state;

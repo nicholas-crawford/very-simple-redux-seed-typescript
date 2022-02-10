@@ -1,13 +1,14 @@
-import {Action} from "redux";
+import payloadAction from "../types/payloadAction";
+import {decrease, increment} from "../actionCreators/actionCreators";
 
 const initialState = { count: 0 };
 
-export const counterReducer = (state = initialState, action: Action<string>) => {
+export const counterReducer = (state = initialState, action: payloadAction) => {
   switch (action.type) {
-    case 'INCREMENT':
-      return {...state, count: state.count + 1};
-    case 'DECREASE':
-      return {...state, count: state.count - 1};
+    case increment:
+      return {...state, count: state.count + action.payload};
+    case decrease:
+      return {...state, count: state.count - action.payload};
     default:
       return state;
   }
